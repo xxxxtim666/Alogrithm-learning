@@ -50,6 +50,33 @@ class Linklist {
       return temp;
     }
   } // pop
+  shift() {
+    if (!this.head) {
+      return;
+    } else if (this.length === 1) {
+      // temp 表示 shift掉的值
+      let temp = this.head;
+      this.head = null;
+      this.length--;
+      return temp;
+    } else {
+      let temp = this.head;
+      this.head = this.head.next;
+      this.length--;
+      return temp;
+    }
+  }
+  unshift(value) {
+    if (!this.head) {
+      this.head = new Node(value);
+    } else {
+      let temp = this.head;
+      let newNode = new Node(value);
+      this.head = newNode;
+      newNode.next = temp;
+    }
+    this.length++;
+  }
   printAll() {
     if (this.length == 0) {
       console.log(`nothing in the linklist`);
@@ -68,5 +95,7 @@ myLinklist.push("Tim");
 myLinklist.push("Mike");
 myLinklist.push("Jame");
 myLinklist.push("Jason");
-console.log(myLinklist.pop());
+// console.log(myLinklist.pop());
+// console.log(myLinklist.shift());
+myLinklist.unshift("Kevin");
 myLinklist.printAll();
