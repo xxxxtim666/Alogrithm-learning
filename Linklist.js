@@ -77,6 +77,31 @@ class Linklist {
     }
     this.length++;
   }
+  // 於指定index插入指定節點
+  insertAt(index, value) {
+    // case1 指定的index不存在
+    if (index > this.length || index < 0) {
+      return null;
+    } else if (index === 0) {
+      // case2 插到第一個節點
+      this.unshift(value);
+      return;
+    } else if (index === this.length) {
+      // case3 插到最後一個節點
+      this.push(value);
+      return;
+    }
+    // other case
+    let currentNode = this.head;
+    let newNode = new Node(value);
+    for (let i = 1; i <= index - 1; i++) {
+      currentNode = currentNode.next;
+    }
+    newNode.next = currentNode.next;
+    currentNode.next = newNode;
+    this.length++;
+    return;
+  }
   printAll() {
     if (this.length == 0) {
       console.log(`nothing in the linklist`);
@@ -97,5 +122,6 @@ myLinklist.push("Jame");
 myLinklist.push("Jason");
 // console.log(myLinklist.pop());
 // console.log(myLinklist.shift());
-myLinklist.unshift("Kevin");
+// myLinklist.unshift("Kevin");
+myLinklist.insertAt(2, "kevin");
 myLinklist.printAll();
