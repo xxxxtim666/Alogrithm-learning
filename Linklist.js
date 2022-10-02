@@ -103,7 +103,7 @@ class Linklist {
     return;
   }
 
-  // Remove At
+  // Remove At (刪除指定節點)
   removeAt(index) {
     // 指定的節點不存在
     if (index > this.length || index < 0) {
@@ -127,6 +127,17 @@ class Linklist {
     this.length--;
     return temp;
   }
+  // 取得指定節點的值
+  get(index) {
+    if (index >= this.length || index < 0) {
+      return null;
+    }
+    let currentNode = this.head;
+    for (let i = 0; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+    return currentNode.value;
+  }
   printAll() {
     if (this.length == 0) {
       console.log(`nothing in the linklist`);
@@ -149,5 +160,6 @@ myLinklist.push("Jason");
 // console.log(myLinklist.shift());
 // myLinklist.unshift("Kevin");
 //myLinklist.insertAt(2, "kevin");
-myLinklist.removeAt(2);
-myLinklist.printAll();
+//myLinklist.removeAt(2);
+console.log(myLinklist.get(3));
+//myLinklist.printAll();
