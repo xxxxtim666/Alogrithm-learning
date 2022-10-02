@@ -102,6 +102,31 @@ class Linklist {
     this.length++;
     return;
   }
+
+  // Remove At
+  removeAt(index) {
+    // 指定的節點不存在
+    if (index > this.length || index < 0) {
+      return null;
+      // 指定節點為第一個節點
+    } else if (index === 0) {
+      let result = this.shift();
+      return result;
+      // 指定節點為最後一個節點
+    } else if (index === this.length) {
+      let result = this.pop();
+      return result;
+    }
+
+    let currentNode = this.head;
+    for (let i = 1; i <= index - 1; i++) {
+      currentNode = currentNode.next;
+    }
+    let temp = currentNode.next;
+    currentNode.next = currentNode.next.next;
+    this.length--;
+    return temp;
+  }
   printAll() {
     if (this.length == 0) {
       console.log(`nothing in the linklist`);
@@ -123,5 +148,6 @@ myLinklist.push("Jason");
 // console.log(myLinklist.pop());
 // console.log(myLinklist.shift());
 // myLinklist.unshift("Kevin");
-myLinklist.insertAt(2, "kevin");
+//myLinklist.insertAt(2, "kevin");
+myLinklist.removeAt(2);
 myLinklist.printAll();
