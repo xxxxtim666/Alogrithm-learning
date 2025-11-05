@@ -1,6 +1,7 @@
 const bulidMaxHeapSort = () => {
+  let parentNode = Math.floor(arr.length) - 1;
   heapSize = arr.length - 1;
-  for (let i = Math.floor(heapSize / 2); i >= 0; i--) {
+  for (let i = parentNode; i >= 0; i--) {
     maxHeapify(i);
   }
 };
@@ -68,5 +69,5 @@ const heapSort = () => {
   return arr;
 };
 let heapSize;
-let arr = [15, 3, 17, 18, 20, 2, 1, 666];
+let arr = [10, 50, 30, 60, 15, 40, 33];
 console.log(heapSort(arr));

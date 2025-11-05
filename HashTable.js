@@ -1,25 +1,26 @@
+// 哈希表類別
 class Hashtable {
-  // m =hashtable size
+  // m = 哈希表大小
   constructor(size) {
     this.size = size;
     this.table = [];
+    // 初始化哈希表，每個位置是一個陣列
     for (let i = 0; i <= this.size; i++) {
       this.table.push([]);
     }
   }
-  // division method
+  // 除法取餘法計算雜湊值
   hash_1(key) {
     return key % this.size;
   }
-
-  // multiplication method
+  // 乘法法計算雜湊值
   hash_2(key) {
     let parsedkey = typeof key !== "number" ? this.parse(key) : key;
     const A = (Math.sqrt(5) - 1) / 2;
     return Math.floor(this.size * ((parsedkey * A) % 1));
   }
 
-  // parse string to number
+  // 將字串轉換為數字
   parse(str) {
     let result = 0;
     for (let i = 0; i < str.length; i++) {
@@ -27,11 +28,13 @@ class Hashtable {
     }
     return result % this.size;
   }
+  // 設定鍵值對
   set(key, value) {
     // value: Mike key: 11545
     let index = this.hash_2(key);
     this.table[index].push({ key, value });
   }
+  // 根據鍵取得值
   get(key) {
     const index = this.hash_2(key);
     for (let i = 0; i < this.table[index].length; i++) {
@@ -41,6 +44,7 @@ class Hashtable {
     }
     return null;
   }
+  // 印出整個哈希表
   printAll() {
     console.log(this.table);
   }
