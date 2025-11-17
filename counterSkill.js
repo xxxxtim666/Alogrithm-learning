@@ -1,24 +1,22 @@
-const arr1 = ["a", "u ", "f"];
-const arr2 = ["z", "u", "s"];
-// 判斷兩個矩陣中的元素,如果有一樣的話 回傳true / false
+// 判斷兩個陣列中是否有相同元素，有則回傳 true，否則回傳 false
+// 使用 Hash Table 技巧來優化查找效率 O(n+m)
 
-// use counterSkill to answer this question
-// step1 : transform arr1 to object structure
-function counterSkill(arr1, arr2) {
-  let object1 = {};
-  for (let i = 0; i < arr1.length; i++) {
-    if (!object1[arr1[i]]) {
-      const item1 = arr1[i];
-      object1[item1] = true;
-    }
-  }
-  //   console.log(object1);
-  // step2;
-  for (let j = 0; j < arr2.length; j++) {
-    if (object1[arr2[j]]) {
+function hasCommonElement(arr1, arr2) {
+  // 將第一個陣列轉換為 Set 來加速查找
+  const set = new Set(arr1);
+  
+  // 檢查第二個陣列是否有任何元素存在於 Set 中
+  for (const element of arr2) {
+    if (set.has(element)) {
       return true;
     }
-    return false;
   }
+  
+  return false;
 }
-console.log(counterSkill(arr1, arr2));
+
+// 測試案例
+const arr1 = ["a", "u ", "f"];
+const arr2 = ["z", "u", "s"];
+
+console.log(hasCommonElement(arr1, arr2)); // false (因為 "u " 和 "u" 不同)
