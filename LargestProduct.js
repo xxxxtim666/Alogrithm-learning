@@ -1,4 +1,55 @@
-let thousandDigits = [
+/**
+ * 最大連續乘積 (Largest Product) - 使用滑動視窗技巧
+ * 
+ * 功能：找出陣列中連續 n 個數字的最大乘積
+ * 時間複雜度：O(n × k) - n 為陣列長度，k 為視窗大小
+ * 空間複雜度：O(1) - 只使用常數額外空間
+ * 
+ * 演算法：
+ * 1. 使用左右雙指針定義滑動視窗
+ * 2. 計算視窗內所有數字的乘積
+ * 3. 更新最大乘積
+ * 4. 視窗向右滑動一格
+ * 5. 重複步驟 2-4 直到視窗到達陣列末端
+ * 
+ * 應用：
+ * - 分析連續數據的趨勢
+ * - 找出最佳子序列
+ * 
+ * @param {number} windowSize - 連續數字的個數
+ * @param {number[]} arr - 數字陣列
+ * @returns {number} 返回最大乘積
+ */
+const largestProduct = (windowSize, arr) => {
+  let currentProduct;
+  let maxProduct = -Infinity;
+  let leftPointer = 0;
+  let rightPointer = windowSize - 1;
+  
+  // 視窗滑動，直到右指針超出陣列範圍
+  while (rightPointer < arr.length) {
+    // 計算當前視窗內的乘積
+    currentProduct = 1;
+    for (let i = leftPointer; i <= rightPointer; i++) {
+      currentProduct *= arr[i];
+    }
+    
+    // 更新最大乘積
+    if (currentProduct > maxProduct) {
+      maxProduct = currentProduct;
+    }
+    
+    // 視窗向右滑動
+    leftPointer++;
+    rightPointer++;
+  }
+  
+  console.log(`連續 ${windowSize} 個數字的最大乘積 = ${maxProduct}`);
+  return maxProduct;
+};
+
+// 測試案例：1000 位數字（來自 Project Euler Problem 8）
+const thousandDigits = [
   7, 3, 1, 6, 7, 1, 7, 6, 5, 3, 1, 3, 3, 0, 6, 2, 4, 9, 1, 9, 2, 2, 5, 1, 1, 9,
   6, 7, 4, 4, 2, 6, 5, 7, 4, 7, 4, 2, 3, 5, 5, 3, 4, 9, 1, 9, 4, 9, 3, 4, 9, 6,
   9, 8, 3, 5, 2, 0, 3, 1, 2, 7, 7, 4, 5, 0, 6, 3, 2, 6, 2, 3, 9, 5, 7, 8, 3, 1,
@@ -40,26 +91,11 @@ let thousandDigits = [
   4, 2, 0, 7, 5, 2, 9, 6, 3, 4, 5, 0,
 ];
 
-// 找出相鄰數字中最大的乘積
-// n:相鄰的數字個數
-const largestProduct = (n, arr) => {
-  let currentProduce;
-  let maxProduct = -Infinity;
-  let left_point = 0;
-  let right_point = n - 1;
-  while (right_point < arr.length) {
-    currentProduce = 1;
-    for (let i = left_point; i <= right_point; i++) {
-      currentProduce = currentProduce * arr[i];
-    }
-    if (currentProduce > maxProduct) {
-      maxProduct = currentProduce;
-    }
-    left_point++;
-    right_point++;
-  } //while
-  console.log(`maxProduct = ${maxProduct}`);
-  return maxProduct;
-};
-
+// 測試
+console.log('=== 找出連續 13 個數字的最大乘積 ===');
 largestProduct(13, thousandDigits);
+
+// 簡單測試
+console.log('\n=== 簡單測試 ===');
+largestProduct(3, [1, 2, 3, 4, 5]); // 3*4*5 = 60
+largestProduct(2, [9, 1, 5, 2, 8, 3]); // 2*8 = 16

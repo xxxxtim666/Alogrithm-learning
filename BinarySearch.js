@@ -1,4 +1,55 @@
-let numbers = [
+/**
+ * 二元搜尋演算法 (Binary Search)
+ * 
+ * 功能：在已排序的陣列中快速搜尋目標數字
+ * 時間複雜度：O(log n) - 每次迭代將搜尋範圍減半
+ * 空間複雜度：O(1) - 只使用常數額外空間
+ * 
+ * 原理：
+ * 1. 前提條件：陣列必須已排序
+ * 2. 從中間元素開始比較
+ * 3. 若目標值大於中間值，搜尋右半部
+ * 4. 若目標值小於中間值，搜尋左半部
+ * 5. 重複直到找到或範圍為空
+ * 
+ * 優勢：比線性搜尋 O(n) 快得多
+ * 
+ * @param {number[]} arr - 要搜尋的數字陣列
+ * @param {number} target - 目標數字
+ * @returns {number} 返回目標數字的索引位置，找不到返回 -1
+ */
+const binarySearch = (arr, target) => {
+  // 確保陣列已排序（從小到大）
+  arr = arr.sort((a, b) => a - b);
+  
+  let min = 0;
+  let max = arr.length - 1;
+
+  // 當搜尋範圍有效時繼續搜尋
+  while (min <= max) {
+    // 計算中間位置（無條件捨去）
+    const middle = Math.floor((min + max) / 2);
+    
+    if (target > arr[middle]) {
+      // 目標在右半部，將最小索引移到中間右側
+      min = middle + 1;
+    } else if (target < arr[middle]) {
+      // 目標在左半部，將最大索引移到中間左側
+      max = middle - 1;
+    } else {
+      // 找到目標
+      console.log(`找到數字 ${target}，位置在索引 ${middle}`);
+      return middle;
+    }
+  }
+  
+  // 搜尋完畢仍未找到
+  console.log(`找不到數字 ${target}`);
+  return -1;
+};
+
+// 測試案例
+const numbers = [
   100, 9, 12, 15, 18, 19, 20, 22, 25, 26, 26, 33, 37, 38, 41, 47, 47, 50, 55,
   57, 60, 68, 80, 87, 90, 98, 100, 103, 108, 109, 109, 116, 120, 120, 124, 127,
   128, 131, 135, 135, 139, 143, 145, 151, 155, 156, 158, 163, 164, 165, 169,
@@ -8,49 +59,4 @@ let numbers = [
   284, 285, 295, 297, 298,
 ];
 
-const binarySearch = (arr, n) => {
-  let min = 0;
-  let max = arr.length - 1;
-  // before binarySort u have to sorting, number from small to big
-  arr = arr.sort((a, b) => a - b);
-  //console.table(arr);
-
-  while (min <= max) {
-    let middle = Math.floor((min + max) / 2);
-    if (n > arr[middle]) {
-      min = middle + 1;
-    } else if (n < arr[middle]) {
-      max = middle - 1;
-    } else if (n === arr[middle]) {
-      console.log(`input number ${n} is found at position ${middle}`);
-      return middle;
-    }
-  }
-  return -1;
-};
-
-// // answer
-// function binarySearch(arr, n) {
-//   let min = 0;
-//   let max = arr.length - 1;
-//   let step = 0;
-
-//   while (min <= max) {
-//     step++;
-//     let middle = Math.floor((max + min) / 2);
-//     if (n > arr[middle]) {
-//       min = middle + 1;
-//     } else if (n < arr[middle]) {
-//       max = middle - 1;
-//     } else if (n === arr[middle]) {
-//       console.log("Found number " + n + " at position " + middle);
-//       console.log("Found it after " + step + " steps.");
-//       return middle;
-//     }
-//   }
-
-//   console.log("Cannot find number " + n);
-//   return -1;
-// }
-
-binarySearch(numbers, 213); // 6 - 7
+binarySearch(numbers, 213);

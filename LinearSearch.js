@@ -1,4 +1,36 @@
-const arr = [
+/**
+ * 線性搜尋 (Linear Search)
+ * 
+ * 功能：循序搜尋陣列中的目標元素
+ * 時間複雜度：O(n) - 最壞情況需要檢查所有元素
+ * 空間複雜度：O(1) - 只使用常數額外空間
+ * 
+ * 特點：
+ * - 簡單直接的搜尋演算法
+ * - 不需要陣列預先排序
+ * - 適用於小型或未排序的資料集
+ * - 若資料已排序，建議使用二元搜尋 (Binary Search) 更有效率
+ * 
+ * @param {Array} arr - 要搜尋的陣列
+ * @param {*} target - 目標值
+ * @returns {number} 返回目標值的索引位置，找不到返回 -1
+ */
+const linearSearch = (arr, target) => {
+  // 逐一檢查陣列中的每個元素
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) {
+      console.log(`找到數字 ${target}，位置在索引 ${i}`);
+      return i;
+    }
+  }
+  
+  // 搜尋完整個陣列仍未找到
+  console.log(`找不到數字 ${target}`);
+  return -1;
+};
+
+// 測試案例
+const testArray = [
   33, 99, 97, 28, 87, 72, 48, 72, 18, 89, 18, 45, 85, 13, 70, 80, 10, 88, 92,
   65, 23, 73, 88, 55, 1, 79, 95, 69, 30, 31, 88, 13, 32, 86, 15, 51, 69, 29, 11,
   26, 62, 0, 45, 32, 21, 4, 73, 10, 88, 23, 93, 34, 91, 68, 8, 36, 66, 19, 45,
@@ -7,27 +39,7 @@ const arr = [
   33,
 ];
 
-// const LinearSearch = (arr, n) => {
-//   arr.map((value, index, arr) => {
-//     if (n === value) {
-//       console.log(`input number${n} is at index${index}`);
-//       return index;
-//     } else {
-//         console.log(`input number ${n} is not found`);
-//       return -1;
-//     }
-//   });
-// };
-
-const LinearSearch = (arr, n) => {
-  for (let i = 0; i < arr.length; i++) {
-    if (n === arr[i]) {
-      console.log(`input number${n} is at index ${i}`);
-      return i;
-    }
-  }
-  console.log(`input number ${n} is not found`);
-  return -1;
-};
-
-LinearSearch(arr, 72);
+console.log('=== 線性搜尋測試 ===');
+linearSearch(testArray, 72);  // 找到第一個 72
+linearSearch(testArray, 100); // 找不到
+linearSearch(testArray, 33);  // 找到（第一個元素）

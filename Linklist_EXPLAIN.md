@@ -50,8 +50,6 @@ class Linklist {
 push(value) {
   let newNode = new Node(value);
   if (this.length === 0) {
-    this.head = newNode;
-  } else {
     let currentNode = this.head;
     while (currentNode.next !== null) {
       currentNode = currentNode.next;
